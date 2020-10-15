@@ -35,15 +35,6 @@ body *, html * {
   text-shadow: 5px 5px 5px rgba(0, 58, 113, 0.8);
 }
 
-.home-btn {
-  color: #FABE00;
-  font-size: 35px;
-  position: absolute;
-  right: 60px;
-  top: 10px;
-  text-shadow: 5px 5px 5px rgba(0, 58, 113, 0.8);
-}
-
 .mgmt-btn:hover {
   -webkit-transform: rotate(90deg);
           transform: rotate(90deg);
@@ -176,12 +167,6 @@ body *, html * {
           justify-content: space-between;
   margin-top: 20px;
   color: #444;
-}
-
-.lottery__prize-list > div {
-  margin-bottom: 30px;
-  font-weight: 900;
-  font-size: 20px;
 }
 
 .lottery__prize-img {
@@ -397,10 +382,6 @@ body *, html * {
   padding: 5px;
   font-weight: 900;
   font-size: 18px;
-}
-
-.admin__add-btn ~ .admin__add-btn {
-  margin-right: 10px;
 }
 
 .admin__add-btn:hover {

@@ -13,6 +13,10 @@ body,html
     text-decoration: none
   *
     transition: .3s
+.err-message
+  color: #ff3b3b
+  font-size: 20px
+  letter-spacing: 1px
 .mgmt-btn
   color: $color_yellow
   font-size: 35px
@@ -185,7 +189,7 @@ body,html
     font-size: 17px
     color: $color_yellow
     text-align: center
-    margin: 10px
+    margin: 10px 0px
     border: solid 2px rgba(255,255,255,.2)
     &:focus
       border: solid 2px $color_yellow
@@ -209,7 +213,7 @@ body,html
       display: flex
       align-items: center
       justify-content: space-between
-      padding: 10px 20px
+      padding: 20px
     &-title
       background: $color-yellow
       color: $color-brown
@@ -227,8 +231,36 @@ body,html
       width: 100px !important
     &-input
       text-align: left !important
+  &__add
+    &-img
+      display: flex
+      flex-direction: column
+      width: 200px
+      height: 200px
+      border: solid 1px white
+      img
+        width: 100%
+      &-btn
+        background: $color_yellow
+    &-btn
+      background: $color_yellow
+      color: $color_brown
+      outline: none
+      border: none
+      width: 120px
+      border-radius: 50px
+      padding: 5px
+      font-weight: 900
+      font-size: 18px
+      &:hover
+        cursor: pointer
+        opacity: .7
+  .update
+    float: right
 
 @media (max-width: 745px)
   .admin__prize-list
     flex-direction: column
     padding: 50px 0px
+  .admin__prize-label
+    text-align: center

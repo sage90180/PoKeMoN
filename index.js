@@ -5,6 +5,9 @@ const flash = require('connect-flash')
 const app = express()
 const port = 5001
 
+const userController = require('./controllers/user')
+const prizeController = require('./controllers/prize')
+
 app.use(session({
   secret: 'keyboard cat',
   resave: false,
@@ -13,6 +16,7 @@ app.use(session({
 
 app.set('view engine', 'ejs')
 app.use(express.static('public'))
+// app.use('/css', express.static('css'))
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 app.use(flash())
@@ -22,14 +26,19 @@ app.use((req, res, next) => {
   next()
 })
 
+function redirectBack(req, res) {
+  res.redirect('back')
+}
+
+app.get('/login', userController.login)
+app.post('/admin', userController.handleLogin, redirectBack)
+app.get('/admin', prizeController.dispalyAdmin)
+app.post('/update/:id', prizeController.update, redirectBack)
+app.post('/add', prizeController.handleAdd, redirectBack)
+app.get('/delete/:id', prizeController.delete, redirectBack)
+
 app.get('/', (req, res) => {
   res.render('index')
-})
-app.get('/login', (req, res) => {
-  res.render('login')
-})
-app.get('/admin', (req, res) => {
-  res.render('admin')
 })
 
 
