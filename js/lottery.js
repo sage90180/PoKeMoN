@@ -45,6 +45,7 @@ const prizeText = document.querySelector('#prizeText')
 const prizeImg = document.querySelector('#prizeImg')
 const playBtn = document.querySelector('#play')
 const stopBtn = document.querySelector('#stop')
+const changeImg = document.querySelector('#changeImg')
 const probability = 30
 const allArr = getTotalArr(probability)
 var prizeAmount = prizeList.length -1
@@ -87,9 +88,11 @@ function playfun() {
   clearInterval(timer);
   timer = setInterval(function () {
     let random = Math.floor(Math.random() * probability)
-    prizeText.innerHTML = random;
+    let img = Math.floor(Math.random()*7)
+    changeImg.innerHTML = `<img src="/imgs/${img}.png" alt="">`
+    prizeText.innerHTML = '?'
     prize = random
-  }, 10)
+  }, 50)
   prizeText.style.fontSize = '120px'
   prizeImg.style.opacity = 0
   playBtn.classList.add('active')
@@ -98,6 +101,7 @@ function playfun() {
 function stopfun() {
   clearInterval(timer);
   displayPrize(prize)
+  changeImg.innerHTML = ''
   prizeText.style.fontSize = '30px'
   prizeImg.style.opacity = 1
   playBtn.classList.remove('active')
