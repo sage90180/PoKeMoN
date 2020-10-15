@@ -193,6 +193,11 @@ body *, html * {
           filter: brightness(1);
 }
 
+.active {
+  background: #FABE00;
+  color: #592D00;
+}
+
 .login {
   margin-top: 50px;
   color: #FEFAE0;

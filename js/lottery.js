@@ -1,96 +1,129 @@
+var prizeList = [{
+  title: '再接再厲',
+  amount: null,
+  img: '<img src="/imgs/b.png" alt="">'
+},
+{
+  title: '頭獎：卡比獸',
+  amount: 1,
+  img: '<img src="/imgs/1.png" alt="">'
+},
+{
+  title: '二獎：皮卡丘',
+  amount: 2,
+  img: '<img src="/imgs/2.png" alt="">'
+},
+{
+  title: '三獎：妙蛙花',
+  amount: 3,
+  img: '<img src="/imgs/3.png" alt="">'
+},
+{
+  title: '四獎：傑尼龜',
+  amount: 4,
+  img: '<img src="/imgs/4.png" alt="">'
+},
+{
+  title: '五獎：小火龍',
+  amount: 5,
+  img: '<img src="/imgs/5.png" alt="">'
+},
+{
+  title: '六獎：可達鴨',
+  amount: 6,
+  img: '<img src="/imgs/6.png" alt="">'
+},
+{
+  title: '七獎：百變怪',
+  amount: 7,
+  img: '<img src="/imgs/7.png" alt="">'
+}
+]
+
+
 const prizeText = document.querySelector('#prizeText')
 const prizeImg = document.querySelector('#prizeImg')
 const playBtn = document.querySelector('#play')
 const stopBtn = document.querySelector('#stop')
-const total = 10000
-const allArr = getTotalArr(total)
+const probability = 30
+const allArr = getTotalArr(probability)
+var prizeAmount = prizeList.length -1
+var prizeTotal = prizeTotal(prizeAmount)
+var prizeNumber = getPrizeNumber(prizeTotal)
 var prize
 var timer
-var first = 1
-var second = 2
-var third = 3
-var fourth = 4
-var fifth = 5
-var sixth = 6
-var seventh = 7
-var prizeNumber = getPrizeNumber(first + second + third + fourth)
 playBtn.onclick = playfun; //開始
 stopBtn.onclick = stopfun; //停止
 
-function getTotalArr(total) {
+
+function getTotalArr(n) {
   let arr = []
-  for (let i = 0; i < total; i++) {
+  for (let i = 0; i < n; i++) {
     arr.push(i)
   }
   return arr
+}
+
+function prizeTotal(n) {
+  let num = 0 
+  for(let i = 0 ; i <= n; i++){
+    num += i
+  }
+  return num
 }
 
 // 取得兌獎號
 function getPrizeNumber(n) {
   let arr = []
   for (let i = 0; i < n; i++) {
-    let random = Math.floor(Math.random() * (total - i))
+    let random = Math.floor(Math.random() * (probability - i))
     arr.push(allArr[random])
     allArr.splice(random, 1)
   }
   return arr
 }
 
-
 function playfun() {
   clearInterval(timer);
   timer = setInterval(function () {
-    let random = Math.floor(Math.random() * total)
+    let random = Math.floor(Math.random() * probability)
     prizeText.innerHTML = random;
     prize = random
   }, 10)
   prizeText.style.fontSize = '120px'
   prizeImg.style.opacity = 0
-  playBtn.style.background = '#FABE00';
-  playBtn.style.color = '#592D00';
+  playBtn.classList.add('active')
 }
 
 function stopfun() {
   clearInterval(timer);
-  getPrize(prize)
+  displayPrize(prize)
   prizeText.style.fontSize = '30px'
   prizeImg.style.opacity = 1
-  playBtn.style.background = '#004D95';
-  playBtn.style.color = '#FEFAE0';
+  playBtn.classList.remove('active')
 }
 
-function getPrize(n) {
+
+// 每個獎項總和
+function getEachePrizeTotal(n) {
+  let total = 0
+  for (let i = 0; i < n; i++) {
+    total += prizeList[i+1].amount
+  }
+  return total
+}
+
+// 顯示獎項
+function displayPrize(n) {
   var index = prizeNumber.indexOf(n)
   if (index === -1) {
     prizeText.innerHTML = '再接再厲'
-    return prizeImg.innerHTML = `<img src="imgs/b.png" alt="">`
+    return prizeImg.innerHTML = `<img src="/imgs/b.png" alt="">`
   }
-  if (index < first) {
-    prizeText.innerHTML = '頭獎：卡比獸'
-    prizeImg.innerHTML = `<img src="imgs/1.png" alt="">`
-  }
-  if (index < (first + second)) {
-    prizeText.innerHTML = '二獎：皮卡丘'
-    return prizeImg.innerHTML = `<img src="imgs/2.png" alt="">`
-  }
-  if (index < (first + second + third)) {
-    prizeText.innerHTML = '三獎：妙蛙花'
-    return prizeImg.innerHTML = `<img src="imgs/3.png" alt="">`
-  }
-  if (index < (first + second + third + fourth)) {
-    prizeText.innerHTML = '四獎：傑尼龜'
-    return prizeImg.innerHTML = `<img src="imgs/4.png" alt="">`
-  }
-  if (index < (first + second + third + fourth + fifth )) {
-    prizeText.innerHTML = '五獎：小火龍'
-    return prizeImg.innerHTML = `<img src="imgs/5.png" alt="">`
-  }
-  if (index < (first + second + third + fourth + fifth + sixth)) {
-    prizeText.innerHTML = '六獎：可達鴨'
-    return prizeImg.innerHTML = `<img src="imgs/6.png" alt="">`
-  }
-  if (index < (first + second + third + fourth + fifth + sixth + seventh)) {
-    prizeText.innerHTML = '五獎：百變怪'
-    return prizeImg.innerHTML = `<img src="imgs/7.png" alt="">`
+  for (let i = 1; i <= prizeAmount; i ++) {
+    if (index < getEachePrizeTotal(i)) {
+      prizeText.innerHTML = prizeList[i].title
+      return prizeImg.innerHTML = prizeList[i].img
+    }
   }
 }
