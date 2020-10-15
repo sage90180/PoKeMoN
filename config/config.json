@@ -2,7 +2,7 @@
   "development": {
     "username": "root",
     "password": "~aA80712",
-    "database": "sage_01",
+    "database": "pokemon",
     "host": "18.220.203.207",
     "dialect": "mysql"
   },
