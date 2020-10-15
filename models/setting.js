@@ -3,21 +3,21 @@ const {
   Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class Set extends Model {
+  class Setting extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      Setting.belongsTo(models.User)
     }
   };
-  Set.init({
+  Setting.init({
     probability: DataTypes.STRING
   }, {
     sequelize,
-    modelName: 'Set',
+    modelName: 'Setting',
   });
-  return Set;
+  return Setting;
 };

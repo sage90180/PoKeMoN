@@ -1,5 +1,7 @@
 const db = require('../models')
+const setting = require('../models/setting')
 const Prize = db.Prize
+const Setting = db.Setting
 const prizeController = {
   handleAdd: (req, res, next) => {
     const {prize} = req.body
@@ -30,6 +32,7 @@ const prizeController = {
       return res.render('login')
     }
     Prize.findAll({
+      include: Setting
     }).then(prizes => {
       res.render('admin',{
         prizes
@@ -85,3 +88,4 @@ const prizeController = {
 }
 
 module.exports = prizeController
+
