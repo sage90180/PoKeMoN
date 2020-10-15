@@ -1,5 +1,4 @@
 const db = require('../models')
-const setting = require('../models/setting')
 const Prize = db.Prize
 const Setting = db.Setting
 const prizeController = {
@@ -32,8 +31,15 @@ const prizeController = {
       return res.render('login')
     }
     Prize.findAll({
-      include: Setting
+      include: [{
+        model: Setting,
+        through: {
+          attributes: ['probability'],
+          where: {completed: true}
+        }
+      }]
     }).then(prizes => {
+      console.log(prizes)
       res.render('admin',{
         prizes
       })
