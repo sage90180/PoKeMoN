@@ -114,7 +114,7 @@ const prizeController = {
     }).then(prizes => {
       const probability = prizes[0]["User.probability"]
       const probabilityArr = GetProbabilityArr(probability)
-      const yourNumber = Math.floor(Math.random() * (probability))
+      const yourNumber = Math.floor(Math.random() * probability)
 
       const allPrize = prizes.length -1 // 獎項
       const sumOfPrize = getSumOfPrize(prizes)// 所有獎項合
@@ -141,10 +141,11 @@ const prizeController = {
         return sum
       }
 
-      // 抽獎囉~
+
+      // 抽獎囉~抽出所有中獎號碼
       function getAllLuckyNumber(n) {
         let arr = []
-        for (let i = 0; i < n; i++) {
+        for (let i = 0; i <= n; i++) {
           let random = Math.floor(Math.random() * (probability - i))
           arr.push(probabilityArr[random])
           probabilityArr.splice(random, 1)
@@ -152,11 +153,14 @@ const prizeController = {
         return arr
       }
 
-      // 每個獎項總和
+
+
+
+      // // 每個獎項總和
       function getEachePrize(n) {
         let sum = 0
         for (let i = 0; i < n; i++) {
-          sum += Number(prizes[i].amount)
+          sum += Number(prizes[i+1].amount)
         }
         return sum
       }
@@ -167,14 +171,14 @@ const prizeController = {
           title: '',
           url: ''
         }
-        let index = allLuckyNumber.indexOf(n)
+        var index = allLuckyNumber.indexOf(n)
+        console.log('索引'+index)
         if (index === -1) {
-          obj.title = '再接再厲'
-          obj.url = `/imgs/b.png`
+          obj.title = prizes[0].title
+          obj.url = prizes[0].url
           return obj
         }
         for (let i = 1; i <= allPrize; i ++) {
-          console.log('確認'+yourNumber)
           if (index < getEachePrize(i)) {
             obj.title = prizes[i].title
             obj.url = prizes[i].url
@@ -182,8 +186,7 @@ const prizeController = {
           }
         }
       }
-      console.log('中獎號碼'+yourNumber)
-      console.log(yourPrize)
+
       res.render('index',{
         prizes
       })

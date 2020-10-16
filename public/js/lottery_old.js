@@ -130,3 +130,27 @@ function displayPrize(n) {
     }
   }
 }
+
+// // 每個獎項總和
+// function getEachePrizeTotal(n) {
+//   let total = 0
+//   for (let i = 0; i < n; i++) {
+//     total += prizeList[i+1].amount
+//   }
+//   return total
+// }
+
+// // 顯示獎項
+// function displayPrize(n) {
+//   var index = prizeNumber.indexOf(n)
+//   if (index === -1) {
+//     prizeText.innerHTML = '再接再厲'
+//     return prizeImg.innerHTML = `<img src="imgs/b.png" alt="">`
+//   }
+//   for (let i = 1; i <= prizeAmount; i ++) {
+//     if (index < getEachePrizeTotal(i)) {
+//       prizeText.innerHTML = prizeList[i].title
+//       return prizeImg.innerHTML = prizeList[i].img
+//     }
+//   }
+// }
