@@ -32,6 +32,7 @@ function redirectBack(req, res) {
 
 app.get('/', prizeController.dispalyIndex)
 app.get('/login', userController.login)
+app.get('/lottery', prizeController.handlelottery)
 app.post('/admin', userController.handleLogin, redirectBack)
 app.post('/probability', userController.updateProbability, redirectBack)
 app.get('/admin', prizeController.dispalyAdmin)

@@ -16,26 +16,26 @@
           <div id="changeImg" class=""></div>
           <div id="prizeImg" alt=""></div>
         </div>
-        <span href="" id="play" class="lottery__prize-btn">開始抽獎</span>
-        <dispanv id="stop" class="lottery__prize-btn">停止抽獎</span>
+        <span id="play" class="lottery__prize-btn">開始抽獎</span>
+        <a href="/lottery" id="stop" class="lottery__prize-btn">停止抽獎</a>
       </div>
     </div>
     <div class="lottery__prize-down">
       <div class="lottery__prize-title">獎 項</div>
       <div class="lottery__prize-list">
         <% prizes.forEach(prize => { %>
-        <div><%= prize.prize %>
+        <div class="prize">
+          <h4><%= prize.prize %></h4>
           <div class="lottery__prize-img">
             <img src="<%= prize.url %>" alt="">
           </div>
-          <span>x<%= prize.amount %></span>
+          x <span><%= prize.amount %></span>
         </div>
         <% }) %>
       </div>
     </div>
   </main>
-
-  <!-- <script src="/js/lottery.js"></script> -->
+  <script src="/js/lottery.js"></script>
 </body>
 
 

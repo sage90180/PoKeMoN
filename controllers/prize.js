@@ -103,6 +103,91 @@ const prizeController = {
       req.flash('errorMessage', err.toString())
       return next()
     })
+  },
+  handlelottery: (req, res, next, ) => {
+    Prize.findAll({
+      raw: true,
+      include: User,
+      where:{
+        delete: null
+      }
+    }).then(prizes => {
+      const probability = prizes[0]["User.probability"]
+      const probabilityArr = GetProbabilityArr(probability)
+      const yourNumber = Math.floor(Math.random() * (probability))
+
+      const allPrize = prizes.length -1 // 獎項
+      const sumOfPrize = getSumOfPrize(prizes)// 所有獎項合
+
+      const allLuckyNumber = getAllLuckyNumber(sumOfPrize) // 中獎號
+
+      const yourPrize = compareNumber(yourNumber) //兌獎
+      
+      // 所有數字陣列
+      function GetProbabilityArr(n) {
+        let arr = []
+        for (let i = 0; i < n; i++) {
+          arr.push(i)
+        }
+        return arr
+      }
+
+      // 所有獎項總和
+      function getSumOfPrize(arr) {
+        let sum = 0
+        for(let i=0;i<arr.length;i++){
+          sum += Number(arr[i].amount)
+        }
+        return sum
+      }
+
+      // 抽獎囉~
+      function getAllLuckyNumber(n) {
+        let arr = []
+        for (let i = 0; i < n; i++) {
+          let random = Math.floor(Math.random() * (probability - i))
+          arr.push(probabilityArr[random])
+          probabilityArr.splice(random, 1)
+        }
+        return arr
+      }
+
+      // 每個獎項總和
+      function getEachePrize(n) {
+        let sum = 0
+        for (let i = 0; i < n; i++) {
+          sum += Number(prizes[i].amount)
+        }
+        return sum
+      }
+
+      // 兌獎囉~
+      function compareNumber(n) {
+        let obj = {
+          title: '',
+          url: ''
+        }
+        let index = allLuckyNumber.indexOf(n)
+        if (index === -1) {
+          obj.title = '再接再厲'
+          obj.url = `/imgs/b.png`
+          return obj
+        }
+        for (let i = 1; i <= allPrize; i ++) {
+          console.log('確認'+yourNumber)
+          if (index < getEachePrize(i)) {
+            obj.title = prizes[i].title
+            obj.url = prizes[i].url
+            return obj
+          }
+        }
+      }
+      console.log('中獎號碼'+yourNumber)
+      console.log(yourPrize)
+      res.render('index',{
+        prizes
+      })
+    })
   }
 }
 
