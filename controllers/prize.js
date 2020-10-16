@@ -1,6 +1,6 @@
 const db = require('../models')
 const Prize = db.Prize
-const Setting = db.Setting
+const User = db.User
 const prizeController = {
   handleAdd: (req, res, next) => {
     const {prize} = req.body
@@ -31,7 +31,7 @@ const prizeController = {
       return res.render('login')
     }
     Prize.findAll({
-      include: Setting,
+      include: User,
       where:{
         delete: null
       }

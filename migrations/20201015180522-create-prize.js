@@ -23,7 +23,7 @@ module.exports = {
       delete: {
         type: Sequelize.STRING
       },
-      SettingId: {
+      UserId: {
         type: Sequelize.STRING
       },
       createdAt: {

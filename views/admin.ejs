@@ -44,7 +44,7 @@
       <% prizes.forEach(prize => { %>
       <form action="/update/<%= prize.id %>" method="POST" class="admin__prize-list">
         <div class="admin__prize-title"><%= prize.prize %>
-          <div><%= prize.amount %>/<%= prize.Setting.probability %></div>
+          <div><%= prize.amount %>/<%= prize.User.probability %></div>
         </div>
         <div class="admin__prize-img">
           <img src="<%= prize.url %>" alt="">
