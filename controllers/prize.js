@@ -3,6 +3,7 @@ const Prize = db.Prize
 const User = db.User
 const prizeController = {
   handleAdd: (req, res, next) => {
+    const {UserId} = req.session
     const {prize} = req.body
     const {title} = req.body
     const {amount} = req.body
@@ -15,7 +16,8 @@ const prizeController = {
       prize,
       title,
       amount,
-      url
+      UserId,
+      url,
     }).then(()=>{
       req.flash('errorMessage', '新增成功！')
       return res.redirect('/admin')
@@ -36,8 +38,20 @@ const prizeController = {
         delete: null
       }
     }).then(prizes => {
-      console.log(prizes)
       res.render('admin',{
+        prizes
+      })
+    })
+  },  
+  dispalyIndex: (req, res) => {
+    Prize.findAll({
+      raw: true,
+      include: User,
+      where:{
+        delete: null
+      }
+    }).then(prizes => {
+      res.render('index',{
         prizes
       })
     })
@@ -84,7 +98,7 @@ const prizeController = {
       })
     }).then(()=>{
       req.flash('errorMessage', '刪除成功！')
-      res.render('admin')
+      return res.redirect('/admin')
     }).catch(err=>{
       req.flash('errorMessage', err.toString())
       return next()

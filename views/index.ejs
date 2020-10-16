@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <%- include ('./templates/head') %> 
+  <%- include ('./templates/head') %>
 </head>
+
 <body>
-  <%- include ('./templates/nav') %> 
-  
+  <%- include ('./templates/nav') %>
+
   <main class="lottery">
     <div class="lottery__prize-top">
       <div class="lottery__control">
@@ -19,58 +21,22 @@
       </div>
     </div>
     <div class="lottery__prize-down">
-        <div class="lottery__prize-title">獎 項</div>
-        <div class="lottery__prize-list">
-          <div>獎項一
-            <div class="lottery__prize-img">
-              <img src="/imgs/1.png" alt="">
-            </div>
-            <span>x1</span>
+      <div class="lottery__prize-title">獎 項</div>
+      <div class="lottery__prize-list">
+        <% prizes.forEach(prize => { %>
+        <div><%= prize.prize %>
+          <div class="lottery__prize-img">
+            <img src="<%= prize.url %>" alt="">
           </div>
-          <div>獎項二
-            <div class="lottery__prize-img">
-              <img src="/imgs/2.png" alt="">
-            </div>
-            <span>x1</span>
-          </div>
-          <div>獎項三
-            <div class="lottery__prize-img">
-              <img src="/imgs/3.png" alt="">
-            </div>
-            <span>x1</span>
-          </div>
-          <div>獎項四
-            <div class="lottery__prize-img">
-              <img src="/imgs/4.png" alt="">
-            </div>
-            <span>x1</span>
-          </div>
-          <div>獎項五
-            <div class="lottery__prize-img">
-              <img src="/imgs/5.png" alt="">
-            </div>
-            <span>x1</span>
-          </div>
-          <div>獎項六
-            <div class="lottery__prize-img">
-              <img src="/imgs/6.png" alt="">
-            </div>
-            <span>x1</span>
-          </div>
-          <div>獎項七
-            <div class="lottery__prize-img">
-              <img src="/imgs/7.png" alt="">
-            </div>
-            <span>x1</span>
-          </div>
-          <div>安慰獎
-            <div class="lottery__prize-img">
-              <img src="/imgs/b.png" alt="">
-            </div>
-          </div>
+          <span>x<%= prize.amount %></span>
         </div>
+        <% }) %>
+      </div>
     </div>
   </main>
-  <script src="/js/lottery.js"></script>
+
+  <!-- <script src="/js/lottery.js"></script> -->
 </body>
+
+
 </html>

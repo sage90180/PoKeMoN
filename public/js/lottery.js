@@ -40,7 +40,6 @@ var prizeList = [{
 }
 ]
 
-
 const prizeText = document.querySelector('#prizeText')
 const prizeImg = document.querySelector('#prizeImg')
 const playBtn = document.querySelector('#play')

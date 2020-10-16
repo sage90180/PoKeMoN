@@ -28,12 +28,33 @@ const userController = {
         return next()
       }
       req.session.username = user.username
+      req.session.UserId = user.id
+      console.log(user.id)
       res.redirect('/admin')
     }).catch(err=>{
       req.flash('errorMessage', err.toString())
       return next()
     })
-  }
+  },
+  updateProbability: (req, res, next) => {
+    const {probability} = req.body
+    if(!probability){
+      req.flash('errorMessage', '請填好，填滿！！')
+      return next()
+    }
+    
+    User.findOne(
+    ).then(user => {
+      return user.update({
+        probability
+      })
+    }).then(() => {
+      return next()
+    }).catch(err=>{
+      req.flash('errorMessage', err.toString())
+      return next()
+    })
+  },
 }
 
 module.exports = userController

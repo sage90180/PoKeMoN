@@ -44,7 +44,7 @@ body *, html * {
   text-shadow: 5px 5px 5px rgba(0, 58, 113, 0.8);
 }
 
-.mgmt-btn:hover {
+.mgmt-btn:hover,.home-btn:hover {
   -webkit-transform: rotate(90deg);
           transform: rotate(90deg);
 }

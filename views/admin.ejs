@@ -6,10 +6,10 @@
 <body>
   <%- include ('./templates/nav') %>
   <main class="admin">
-    <form action="" method="" class="admin-group">
+    <form action="/probability" method="POST" class="admin-group">
       <label for="">機 率</label>
-      <input type="text" value="">
-      <a href="" class="admin__add-btn" style="margin-left: 10px;">更新</a>
+      <input type="text" value="<%= prizes[0].User.probability %>" name="probability">
+      <button type="submit" class="admin__add-btn" style="margin-left: 10px;">更新</button>
     </form>
     <div>
       <div class="admin__prize-lists">

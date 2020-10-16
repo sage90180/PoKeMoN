@@ -30,16 +30,14 @@ function redirectBack(req, res) {
   res.redirect('back')
 }
 
+app.get('/', prizeController.dispalyIndex)
 app.get('/login', userController.login)
 app.post('/admin', userController.handleLogin, redirectBack)
+app.post('/probability', userController.updateProbability, redirectBack)
 app.get('/admin', prizeController.dispalyAdmin)
 app.post('/update/:id', prizeController.update, redirectBack)
 app.post('/add', prizeController.handleAdd, redirectBack)
 app.get('/delete/:id', prizeController.delete, redirectBack)
-
-app.get('/', (req, res) => {
-  res.render('index')
-})
 
 
 app.listen(port, () => {
