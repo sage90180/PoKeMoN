@@ -31,13 +31,10 @@ const prizeController = {
       return res.render('login')
     }
     Prize.findAll({
-      include: [{
-        model: Setting,
-        through: {
-          attributes: ['probability'],
-          where: {completed: true}
-        }
-      }]
+      include: Setting,
+      where:{
+        delete: null
+      }
     }).then(prizes => {
       console.log(prizes)
       res.render('admin',{
@@ -81,8 +78,10 @@ const prizeController = {
       where:{
         id: req.params.id,
       }
-    }).then(prizes=>{
-      return prizes.destroy()
+    }).then( prizes =>{
+      prizes.update({
+        delete: '1'
+      })
     }).then(()=>{
       req.flash('errorMessage', '刪除成功！')
       res.render('admin')
@@ -94,4 +93,3 @@ const prizeController = {
 }
 
 module.exports = prizeController
-

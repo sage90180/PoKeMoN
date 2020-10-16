@@ -10,6 +10,8 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
+      Prize.belongsTo(models.Setting)
+      // define association here
     }
   };
   Prize.init({
@@ -17,7 +19,8 @@ module.exports = (sequelize, DataTypes) => {
     title: DataTypes.STRING,
     amount: DataTypes.STRING,
     url: DataTypes.STRING,
-    remainder: DataTypes.STRING
+    delete: DataTypes.STRING,
+    SettingId: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'Prize',

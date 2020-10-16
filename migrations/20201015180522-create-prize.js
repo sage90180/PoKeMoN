@@ -13,14 +13,17 @@ module.exports = {
       },
       title: {
         type: Sequelize.STRING
-      }, 
+      },
       amount: {
         type: Sequelize.STRING
       },
       url: {
         type: Sequelize.STRING
       },
-      remainder: {
+      delete: {
+        type: Sequelize.STRING
+      },
+      SettingId: {
         type: Sequelize.STRING
       },
       createdAt: {
