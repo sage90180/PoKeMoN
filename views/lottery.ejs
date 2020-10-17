@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <%- include ('./templates/head') %>
+</head>
+
+<body>
+  <%- include ('./templates/nav') %>
+
+  <main class="lottery">
+    <div class="lottery__prize-top">
+      <div class="lottery__control">
+        <div class="lottery__prize-area">
+          <div id="prizeText" class="prizr-title" style="font-size: 30px;">
+            <%= yourPrize.title %> 
+          </div>
+          <div id="prizeImg" alt="">
+            <img src="<%= yourPrize.url %> " alt="">
+          </div>
+          <div id="changeImg" class=""></div>
+        </div>
+        
+        
+        
+        <span id="play" class="lottery__prize-btn">開始抽獎</span>
+        <a href="/lottery" id="stop" class="lottery__prize-btn">停止抽獎</a>
+      </div>
+    </div>
+    <div class="lottery__prize-down">
+      <div class="lottery__prize-title">獎 項</div>
+      <div class="lottery__prize-list">
+        <% prizes.forEach(prize => { %>
+        <div class="prize">
+          <h4><%= prize.prize %></h4>
+          <div class="lottery__prize-img">
+            <img src="<%= prize.url %>" alt="">
+          </div>
+          x <span><%= prize.amount %></span>
+        </div>
+        <% }) %>
+      </div>
+
+    </div>
+  </main>
+  <script src="/js/lottery.js"></script>
+</body>
+
+
+</html>

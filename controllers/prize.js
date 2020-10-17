@@ -169,6 +169,7 @@ const prizeController = {
           url: ''
         }
         var index = allLuckyNumber.indexOf(n)
+        console.log('順序：'+index)
         if (index === -1) {
           obj.title = prizes[0].title
           obj.url = prizes[0].url
@@ -179,13 +180,14 @@ const prizeController = {
             obj.title = prizes[i].title
             obj.url = prizes[i].url
             return obj
-          }{
-            obj.title = prizes[0].title
-            obj.url = prizes[0].url
-            return obj
           }
         }
+        obj.title = prizes[0].title
+        obj.url = prizes[0].url
+        return obj
       }
+      console.log('你的號碼：'+yourNumber)
+      console.log(allLuckyNumber)
       console.log(yourPrize)
       return res.render('lottery',{
         prizes,
