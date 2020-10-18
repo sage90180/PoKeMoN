@@ -20,9 +20,6 @@
           </div>
           <div id="changeImg" class=""></div>
         </div>
-        
-        
-        
         <span id="play" class="lottery__prize-btn">開始抽獎</span>
         <a href="/lottery" id="stop" class="lottery__prize-btn">停止抽獎</a>
       </div>
@@ -36,7 +33,10 @@
           <div class="lottery__prize-img">
             <img src="<%= prize.url %>" alt="">
           </div>
-          x <span><%= prize.amount %></span>
+          <% if(prize.id == 1) { %>
+          <% } else { %>
+            x <span><%= prize.amount %></span>
+          <% } %>
         </div>
         <% }) %>
       </div>
