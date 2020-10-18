@@ -112,15 +112,19 @@ const prizeController = {
         delete: null
       }
     }).then(prizes => {
-      const probability = prizes[0]["User.probability"]
-      const probabilityArr = GetProbabilityArr(probability)
-      const yourNumber = Math.floor(Math.random() * probability)
-
       const allPrize = prizes.length -1 // 獎項
       const sumOfPrize = getSumOfPrize(prizes)// 所有獎項合
 
-      const allLuckyNumber = getAllLuckyNumber(sumOfPrize) // 中獎號
+      var probability = prizes[0]["User.probability"]
 
+      if(sumOfPrize > probability) {
+        probability = sumOfPrize
+      }
+
+      const probabilityArr = GetProbabilityArr(probability)
+      const yourNumber = Math.floor(Math.random() * probability)
+
+      const allLuckyNumber = getAllLuckyNumber(sumOfPrize) // 中獎號
       const yourPrize = compareNumber(yourNumber) //兌獎
       
       // 所有數字陣列
@@ -145,7 +149,7 @@ const prizeController = {
       // 抽獎囉~抽出所有中獎號碼
       function getAllLuckyNumber(n) {
         let arr = []
-        for (let i = 0; i <= n; i++) {
+        for (let i = 0; i < n; i++) {
           let random = Math.floor(Math.random() * (probability - i))
           arr.push(probabilityArr[random])
           probabilityArr.splice(random, 1)
@@ -153,7 +157,7 @@ const prizeController = {
         return arr
       }
 
-      // // 每個獎項總和
+      // 每個獎項總和
       function getEachePrize(n) {
         let sum = 0
         for (let i = 0; i < n; i++) {
