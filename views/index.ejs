@@ -29,7 +29,10 @@
           <div class="lottery__prize-img">
             <img src="<%= prize.url %>" alt="">
           </div>
-          x <span><%= prize.amount %></span>
+          <% if(prize.id == 1) { %>
+          <% } else { %>
+            x <span><%= prize.amount %></span>
+          <% } %>
         </div>
         <% }) %>
       </div>
