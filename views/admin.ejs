@@ -66,7 +66,10 @@
             <label class="admin__prize-label" for="">圖片網址：</label>
             <input class="admin__prize-input" name="url" type="text" value="<%= prize.url %>">
           </div>
-          <a href="/delete/<%= prize.id %>" class="admin__add-btn update">刪 除 <i class="fas fa-trash-alt"></i></a>
+          <% if(prize.id == 1) { %>
+          <% } else { %>
+            <a href="/delete/<%= prize.id %>" class="admin__add-btn update">刪 除 <i class="fas fa-trash-alt"></i></a>
+          <% } %>
           <button type="submit" class="admin__add-btn update">更 新 <i class="fas fa-check"></i></button>
         </div>
       </form>
